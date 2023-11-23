@@ -123,7 +123,8 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:4000/login";
+    // const url = "http://localhost:4000/login";
+    const url ="https://fignuscart-ly1x.onrender.com/login";
   
     axios.post(url, formData)
       .then((response) => {
@@ -138,13 +139,15 @@ function Login() {
           localStorage.setItem("userid", usersid);
           localStorage.setItem("email", email);
   
-          Navi("/"); // Redirect to the desired page
-  
+
           // Show success notification
           toast.success("Login successful!", {
             position: "top-center",
             autoClose: 2000, // Close the toast after 2 seconds
           });
+          Navi("/"); // Redirect to the desired page
+  
+          
         } else {
           setdata(response.data.msg);
         }
