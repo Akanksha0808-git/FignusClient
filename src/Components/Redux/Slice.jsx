@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // Create a function to initialize the state, either from localStorage or with an empty array
 const initializeState = () => {
   const localStorageData = localStorage.getItem("cartData");
+  console.log("localStorageData:", localStorageData);
   return localStorageData ? JSON.parse(localStorageData) : [];
 };
 
@@ -21,6 +22,7 @@ const Slice = createSlice({
       } else {
         newItem.quantity = 1;
         state.data.push(newItem);
+        // state.data = [newItem];
       }
 
       // Update localStorage whenever state is modified
@@ -59,9 +61,23 @@ const Slice = createSlice({
       // Update localStorage whenever state is modified
       localStorage.setItem("cartData", JSON.stringify(state.data));
     },
+    // clearCart: (state) => {
+    //   state.data = [];
+    // },
+    clearCart: (state) => {
+     
+        state.data = [];
+        localStorage.removeItem(localStorageData);
+   
+    },
     
   },
 });
 
+
+const { addtocart, increment, decrement, removeItem, clearCart } = Slice.actions;
+
+
+export { addtocart, increment, decrement, removeItem, clearCart };
+
 export default Slice.reducer;
-export const { addtocart, increment, decrement, removeItem } = Slice.actions;
